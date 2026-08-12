@@ -1,0 +1,6 @@
+{
+  "name": "VivoFácil",
+  "description": "Plataforma para la administración digital de conjuntos habitacionales con control de acceso por QR y gestión de pagos y adeudos.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

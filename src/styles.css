@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --color-primary: #FE5615;
+    --color-primary-50: rgba(254, 86, 21, 0.5);
+    --color-primary-20: rgba(254, 86, 21, 0.2);
+    --color-primary-10: rgba(254, 86, 21, 0.1);
+    --color-primary-5: rgba(254, 86, 21, 0.05);
+
+    --color-dark: #1A1A1A;
+    --color-gray: #637381;
+    --color-border: #E1E2E9;
+    --color-bg: #F7F7F8;
+    --color-table: #F9F9F9;
+    --color-white: #FFFFFF;
+  }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--color-bg);
+    color: var(--color-dark);
+  }
+}
+
+/* Ensure all interactive elements display pointer cursor */
+button,
+a,
+select,
+summary,
+label,
+[role="button"],
+[role="tab"],
+[role="menuitem"],
+[role="option"],
+.cursor-pointer,
+[onClick],
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+input[type="checkbox"],
+input[type="radio"],
+.interactive-element,
+.clickable {
+  cursor: pointer !important;
+}
+
+button:disabled,
+input:disabled,
+select:disabled,
+textarea:disabled {
+  cursor: not-allowed !important;
+}
+
+/* Custom scrollbars and Leaflet popup styling */
+.leaflet-container {
+  font-family: 'Poppins', sans-serif !important;
+  border-radius: 0.75rem;
+  z-index: 10;
+}
+

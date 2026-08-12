@@ -1,0 +1,87 @@
+<div class="h-screen overflow-hidden bg-[#F7F7F8] text-[#1A1A1A] font-poppins flex flex-col selection:bg-[#FE5615] selection:text-white">
+  
+  <!-- Global Toast Notification -->
+  @if (toast(); as t) {
+    <div class="fixed top-5 right-5 sm:top-6 sm:right-6 z-[99999] transition-all duration-300 animate-bounce-short pointer-events-auto">
+      <div 
+        [class.bg-emerald-600]="t.type === 'success'"
+        [class.bg-red-600]="t.type === 'error'"
+        [class.bg-blue-600]="t.type === 'info'"
+        class="text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-white/20 flex items-center gap-3 text-xs font-bold max-w-sm sm:max-w-md ring-4 ring-black/10"
+      >
+        <span class="material-icons text-xl shrink-0">
+          {{ t.type === 'success' ? 'check_circle' : t.type === 'error' ? 'error' : 'info' }}
+        </span>
+        <span class="leading-snug break-words">{{ t.message }}</span>
+      </div>
+    </div>
+  }
+
+  @if (!currentUser()) {
+    <main class="flex-1 overflow-y-auto">
+      @if (authScreen() === 'login') {
+        <app-login (goToRegister)="showRegister()"></app-login>
+      } @else {
+        <app-register (goToLogin)="showLogin()"></app-register>
+      }
+    </main>
+  } @else {
+    @if (currentUser()?.status !== 'Activa') {
+      <main class="flex-1 overflow-y-auto flex items-center justify-center p-4">
+        <app-account-status-notice class="w-full max-w-lg"></app-account-status-notice>
+      </main>
+    } @else {
+      <!-- Authenticated Layout with Side Navigation (Sidenav) -->
+      <div class="flex flex-col md:flex-row flex-1 h-full overflow-hidden">
+        
+        <!-- Sidenav fixed on left -->
+        <app-sidenav class="shrink-0 h-full"></app-sidenav>
+
+        <!-- Main Workspace Area -->
+        <main class="flex-1 overflow-y-auto min-w-0 p-2 sm:p-3 md:p-4 lg:p-5">
+          @if (activeNavTab() === 'perfil') {
+            <app-profile></app-profile>
+          } @else if (activeNavTab() === 'notificaciones') {
+            <app-notifications></app-notifications>
+          } @else {
+            
+            <!-- Active Role Dashboards -->
+            @switch (activeRole()) {
+              @case ('Residente') {
+                <app-resident-dashboard></app-resident-dashboard>
+              }
+              @case ('Administrador') {
+                <app-admin-dashboard></app-admin-dashboard>
+              }
+              @case ('Vigilante') {
+                <app-vigilante-dashboard></app-vigilante-dashboard>
+              }
+              @default {
+                <app-resident-dashboard></app-resident-dashboard>
+              }
+            }
+
+          }
+        </main>
+
+      </div>
+    }
+  }
+
+  <!-- Global Footer -->
+  <footer class="bg-white border-t border-[#E1E2E9] py-2.5 text-center text-xs text-[#637381] shrink-0">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
+      <div>
+        <strong class="text-[#1A1A1A]">VivoFácil</strong> — Administración Digital de Conjuntos Habitacionales Multi-Tenant
+      </div>
+      <div class="flex items-center gap-3 text-[11px]">
+        <span>Control por QR</span>
+        <span>•</span>
+        <span>Pagos y Adeudos</span>
+        <span>•</span>
+        <span>Validación Manual INE</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
