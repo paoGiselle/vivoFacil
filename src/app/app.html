@@ -32,14 +32,13 @@
       </main>
     } @else {
       <!-- Authenticated Layout with Side Navigation (Sidenav) -->
-      <div class="flex flex-col md:flex-row flex-1 h-full overflow-hidden">
-        
+          <div class="flex flex-col md:flex-row flex-1 min-h-0 overflow-hidden">        
         <!-- Sidenav fixed on left -->
-        <app-sidenav class="shrink-0 h-full"></app-sidenav>
+        <app-sidenav class="shrink-0 md:h-full"></app-sidenav>
 
         <!-- Main Workspace Area -->
-        <main class="flex-1 overflow-y-auto min-w-0 p-2 sm:p-3 md:p-4 lg:p-5">
-          @if (activeNavTab() === 'perfil') {
+        <main class="flex-1 min-h-0 min-w-0 overflow-y-auto p-2 sm:p-3 md:p-4 lg:p-5">
+        @if (activeNavTab() === 'perfil') {
             <app-profile></app-profile>
           } @else if (activeNavTab() === 'notificaciones') {
             <app-notifications></app-notifications>
